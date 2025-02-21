@@ -48,6 +48,23 @@ lv_display_t * lv_st7789_create(uint32_t hor_res, uint32_t ver_res, lv_lcd_flag_
                                 lv_st7789_send_cmd_cb_t send_cmd_cb, lv_st7789_send_color_cb_t send_color_cb);
 
 /**
+ * Create an LCD display with ST7789 driver
+ * @param hor_res       horizontal resolution
+ * @param ver_res       vertical resolution
+ * @param send_cmd      platform-dependent function to send a command to the LCD controller (usually uses polling transfer)
+ * @param send_color    platform-dependent function to send pixel data to the LCD controller (usually uses DMA transfer: must implement a 'ready' callback)
+ * @return              pointer to the created display
+ */
+lv_display_t * lv_st7789_create_display(uint32_t hor_res, uint32_t ver_res, lv_st7789_send_cmd_cb_t send_cmd_cb, lv_st7789_send_color_cb_t send_color_cb);
+
+/**
+ * Initialize the ST7789 display
+ * @param disp          display object
+ * @param flags         default configuration settings (mirror, RGB ordering, etc.)
+ */
+void lv_st7789_init(lv_display_t * disp, lv_lcd_flag_t flags);
+
+/**
  * Set gap, i.e., the offset of the (0,0) pixel in the VRAM
  * @param disp          display object
  * @param x             x offset

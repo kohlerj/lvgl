@@ -183,8 +183,25 @@ typedef struct {
  *                      `lv_display_flush_ready` must be called after the transfer has finished.
  * @return              pointer to the created display
  */
-lv_display_t * lv_lcd_generic_mipi_create(uint32_t hor_res, uint32_t ver_res, lv_lcd_flag_t flags,
-                                          lv_lcd_send_cmd_cb_t send_cmd_cb, lv_lcd_send_color_cb_t send_color_cb);
+lv_display_t * lv_lcd_generic_mipi_create(uint32_t hor_res, uint32_t ver_res, lv_lcd_flag_t flags, lv_lcd_send_cmd_cb_t send_cmd_cb, lv_lcd_send_color_cb_t send_color_cb);
+
+/**
+ * Create a MIPI DCS compatible LCD display, without any callbacks calls
+ * @param hor_res       horizontal resolution
+ * @param ver_res       vertical resolution
+ * @param send_cmd      platform-dependent function to send a command to the LCD controller (usually uses polling transfer)
+ * @param send_color    platform-dependent function to send pixel data to the LCD controller (usually uses DMA transfer).
+ *                      `lv_display_flush_ready` must be called after the transfer has finished.
+ * @return              pointer to the created display
+ */
+lv_display_t * lv_lcd_generic_mipi_create_display(uint32_t hor_res, uint32_t ver_res, lv_lcd_send_cmd_cb_t send_cmd_cb, lv_lcd_send_color_cb_t send_color_cb);
+
+/**
+ * Initialize the MIPI DCS display
+ * @param disp          display object
+ * @param flags         default configuration settings (mirror, RGB ordering, etc.)
+ */
+void lv_lcd_generic_mipi_init(lv_display_t * disp, lv_lcd_flag_t flags);
 
 /**
  * Set gap, i.e., the offset of the (0,0) pixel in the VRAM
